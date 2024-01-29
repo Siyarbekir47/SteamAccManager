@@ -62,7 +62,6 @@ namespace SteamAccManager
         private UserDataAccess _userDataAccess;
         private SteamService _steamService;
         private string _appFolder;
-        private List<GameInfo> _allGames;
 
 
 
@@ -132,7 +131,7 @@ namespace SteamAccManager
                     try
                     {
                         List<GameInfo> loadedGames = _gameDataAccess.GetUserGames(steamID64);
-                        _allGames = loadedGames;
+
                         UpdateGamesListUI(loadedGames);
                     }
                     catch (Exception ex)
@@ -560,8 +559,6 @@ namespace SteamAccManager
                 linkLabelProfile.Tag = profileLink;
 
                 linkLabelProfile.Text = profileData.Nickname;
-
-
             }
 
         }
@@ -622,12 +619,13 @@ namespace SteamAccManager
             if (!string.IsNullOrWhiteSpace(searchTerm) && txtSearchBox.Text != "Search For Something...")
             {
                 // Filter the list based on the search term
-                filteredGames = _allGames.Where(game => game.Name.ToLower().Contains(searchTerm)).ToList();
+                filteredGames = _gameDataAccess.GetUserGames(_userDataAccess.LoadUsers()[comboBox1.SelectedIndex].steamID64).Where(game => game.Name.ToLower().Contains(searchTerm)).ToList();
             }
             else
             {
                 // If the search term is empty, use the full list
-                filteredGames = _allGames;
+
+                filteredGames = _gameDataAccess.GetUserGames(_userDataAccess.LoadUsers()[comboBox1.SelectedIndex].steamID64);
             }
 
             // Update the ListView with the filtered list
