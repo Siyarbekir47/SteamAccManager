@@ -1,1 +1,1 @@
-![grafik](https://github.com/Siyarbekir47/SteamAccManager/assets/146875165/d43793ff-439e-42f4-9bc8-cdde9d8370ff)
+![grafik](https://github.com/Siyarbekir47/SteamAccManager/assets/146875165/d9cd9e21-b271-414d-93de-84890e841e86)
