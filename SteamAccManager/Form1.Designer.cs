@@ -75,7 +75,7 @@
             // PnlNav
             // 
             PnlNav.BackColor = Color.FromArgb(0, 126, 249);
-            PnlNav.Location = new Point(0, 193);
+            PnlNav.Location = new Point(0, 303);
             PnlNav.Name = "PnlNav";
             PnlNav.Size = new Size(3, 100);
             PnlNav.TabIndex = 2;
@@ -90,7 +90,7 @@
             feetchGamesButton.FlatStyle = FlatStyle.Flat;
             feetchGamesButton.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             feetchGamesButton.ForeColor = Color.FromArgb(0, 126, 249);
-            feetchGamesButton.Image = Properties.Resources.delete32;
+            feetchGamesButton.Image = (Image)resources.GetObject("feetchGamesButton.Image");
             feetchGamesButton.ImageAlign = ContentAlignment.MiddleRight;
             feetchGamesButton.Location = new Point(0, 367);
             feetchGamesButton.Name = "feetchGamesButton";
@@ -114,7 +114,7 @@
             btnShowPassword.FlatStyle = FlatStyle.Flat;
             btnShowPassword.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             btnShowPassword.ForeColor = Color.FromArgb(0, 126, 249);
-            btnShowPassword.Image = Properties.Resources.delete32;
+            btnShowPassword.Image = (Image)resources.GetObject("btnShowPassword.Image");
             btnShowPassword.ImageAlign = ContentAlignment.MiddleRight;
             btnShowPassword.Location = new Point(0, 409);
             btnShowPassword.Name = "btnShowPassword";
@@ -138,7 +138,7 @@
             btnCopyPassword.FlatStyle = FlatStyle.Flat;
             btnCopyPassword.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             btnCopyPassword.ForeColor = Color.FromArgb(0, 126, 249);
-            btnCopyPassword.Image = Properties.Resources.delete32;
+            btnCopyPassword.Image = (Image)resources.GetObject("btnCopyPassword.Image");
             btnCopyPassword.ImageAlign = ContentAlignment.MiddleRight;
             btnCopyPassword.Location = new Point(0, 451);
             btnCopyPassword.Name = "btnCopyPassword";
@@ -162,7 +162,7 @@
             buttonStartGame.FlatStyle = FlatStyle.Flat;
             buttonStartGame.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             buttonStartGame.ForeColor = Color.FromArgb(0, 126, 249);
-            buttonStartGame.Image = Properties.Resources.delete32;
+            buttonStartGame.Image = (Image)resources.GetObject("buttonStartGame.Image");
             buttonStartGame.ImageAlign = ContentAlignment.MiddleRight;
             buttonStartGame.Location = new Point(0, 264);
             buttonStartGame.Name = "buttonStartGame";
@@ -186,7 +186,7 @@
             addUserButton.FlatStyle = FlatStyle.Flat;
             addUserButton.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             addUserButton.ForeColor = Color.FromArgb(0, 126, 249);
-            addUserButton.Image = Properties.Resources.delete32;
+            addUserButton.Image = (Image)resources.GetObject("addUserButton.Image");
             addUserButton.ImageAlign = ContentAlignment.MiddleRight;
             addUserButton.Location = new Point(0, 493);
             addUserButton.Name = "addUserButton";
@@ -210,7 +210,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             button2.ForeColor = Color.FromArgb(0, 126, 249);
-            button2.Image = Properties.Resources.delete32;
+            button2.Image = (Image)resources.GetObject("button2.Image");
             button2.ImageAlign = ContentAlignment.MiddleRight;
             button2.Location = new Point(0, 194);
             button2.Name = "button2";
@@ -234,7 +234,7 @@
             deleteUser.FlatStyle = FlatStyle.Flat;
             deleteUser.Font = new Font("Nirmala UI", 9.75F, FontStyle.Bold);
             deleteUser.ForeColor = Color.FromArgb(0, 126, 249);
-            deleteUser.Image = Properties.Resources.delete32;
+            deleteUser.Image = (Image)resources.GetObject("deleteUser.Image");
             deleteUser.ImageAlign = ContentAlignment.MiddleRight;
             deleteUser.Location = new Point(0, 535);
             deleteUser.Name = "deleteUser";
@@ -281,7 +281,7 @@
             linkLabelProfile.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold);
             linkLabelProfile.ForeColor = Color.FromArgb(0, 126, 249);
             linkLabelProfile.LinkColor = Color.FromArgb(0, 126, 249);
-            linkLabelProfile.Location = new Point(94, 146);
+            linkLabelProfile.Location = new Point(67, 147);
             linkLabelProfile.Name = "linkLabelProfile";
             linkLabelProfile.Size = new Size(80, 16);
             linkLabelProfile.TabIndex = 1;
@@ -314,7 +314,7 @@
             // 
             // txtSearchBox
             // 
-            txtSearchBox.BackColor = Color.FromArgb(74, 79, 99);
+            txtSearchBox.BackColor = Color.FromArgb(47, 54, 61);
             txtSearchBox.BorderStyle = BorderStyle.None;
             txtSearchBox.Cursor = Cursors.IBeam;
             txtSearchBox.Font = new Font("MS PGothic", 12F);
@@ -325,10 +325,13 @@
             txtSearchBox.Size = new Size(170, 20);
             txtSearchBox.TabIndex = 2;
             txtSearchBox.Text = "Search For Something...";
+            txtSearchBox.Click += txtSearchBox_Click;
+            txtSearchBox.TextChanged += txtSearchBox_TextChanged;
+            txtSearchBox.Leave += txtSearchBox_Leave;
             // 
             // lstvGames
             // 
-            lstvGames.BackColor = Color.FromArgb(74, 79, 99);
+            lstvGames.BackColor = Color.FromArgb(47, 54, 61);
             lstvGames.BorderStyle = BorderStyle.None;
             lstvGames.Columns.AddRange(new ColumnHeader[] { tabFirst });
             lstvGames.Font = new Font("MS PGothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -372,7 +375,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(45, 51, 72);
+            BackColor = Color.FromArgb(36, 41, 46);
             ClientSize = new Size(701, 577);
             Controls.Add(exitButton);
             Controls.Add(lstvGames);

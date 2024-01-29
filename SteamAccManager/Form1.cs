@@ -6,6 +6,8 @@ using System.Net;
 using SteamAccManager.Models;
 using SteamAccManager.DataAccess;
 using SteamAccManager.Services;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
@@ -60,7 +62,7 @@ namespace SteamAccManager
         private UserDataAccess _userDataAccess;
         private SteamService _steamService;
         private string _appFolder;
-
+        private List<GameInfo> _allGames;
 
 
 
@@ -130,6 +132,7 @@ namespace SteamAccManager
                     try
                     {
                         List<GameInfo> loadedGames = _gameDataAccess.GetUserGames(steamID64);
+                        _allGames = loadedGames;
                         UpdateGamesListUI(loadedGames);
                     }
                     catch (Exception ex)
@@ -179,6 +182,7 @@ namespace SteamAccManager
 
             lstvGames.ListViewItemSorter = new ListViewItemComparer(0, SortOrder.Ascending);
             lstvGames.Sort();
+            
         }
 
 
@@ -537,7 +541,22 @@ namespace SteamAccManager
         {
 
             lstvGames.Items.Clear();
-            LoadGamesFromDataAccess();
+
+            // Get the selected user's SteamID64 from the UserDataAccess.
+            string steamID64 = _userDataAccess.LoadUsers()[comboBox1.SelectedIndex].steamID64;
+
+            // Load the user's games.
+            var loadedGames = _gameDataAccess.GetUserGames(steamID64);
+
+            // Check if there's text to search for.
+            string searchText = txtSearchBox.Text.Trim().ToLower();
+            if (!string.IsNullOrEmpty(searchText) && searchText != "search for something...")
+            {
+                // If there is search text, filter the loaded games.
+                loadedGames = loadedGames.Where(game => game.Name.ToLower().Contains(searchText)).ToList();
+            }
+
+            UpdateGamesListUI(loadedGames);
 
             string profileJsonPath = Path.Combine(myAppFolder, _userDataAccess.LoadUsers()[comboBox1.SelectedIndex].steamID64 + "Ai.json");
             if (File.Exists(profileJsonPath))
@@ -597,6 +616,43 @@ namespace SteamAccManager
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-    }
 
+        private void txtSearchBox_Click(object sender, EventArgs e)
+        {
+            if (txtSearchBox.Text == "Search For Something...")
+            {
+                txtSearchBox.Clear();
+            }
+
+        }
+
+        private void txtSearchBox_Leave(object sender, EventArgs e)
+        {
+            if (txtSearchBox.Text == "")
+            {
+                txtSearchBox.Text = "Search For Something...";
+            }
+        }
+        private void txtSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearchBox.Text.ToLower();
+            List<GameInfo> filteredGames;
+
+            // Make sure to load and assign _allGames before filtering
+            if (!string.IsNullOrWhiteSpace(searchTerm) && txtSearchBox.Text != "Search For Something...")
+            {
+                // Filter the list based on the search term
+                filteredGames = _allGames.Where(game => game.Name.ToLower().Contains(searchTerm)).ToList();
+            }
+            else
+            {
+                // If the search term is empty, use the full list
+                filteredGames = _allGames;
+            }
+
+            // Update the ListView with the filtered list
+            UpdateGamesListUI(filteredGames);
+        }
+
+    }
 }
