@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
+using SteamAccManager.DataAccess;
+using System.Diagnostics;
+using SteamAccManager.Models;
+using System.DirectoryServices;
 
 namespace SteamAccManager.Services
 {
@@ -58,10 +63,31 @@ namespace SteamAccManager.Services
                     {
                         File.Delete(gamesFilePath);
                     }
-
-
                     MessageBox.Show("Spiele gefunden.");
                     // Serialize the list of games to JSON as an array
+
+
+
+                    string tempFilePath2 = Path.Combine(_resourcesFolder, "0.jpg");
+
+                    if (!File.Exists(tempFilePath2))
+                    {
+                        string urlGameIcon2 = $"https://siyargame.de/downloads/SteamManager/icon.jpg";
+                        using (var client2 = new HttpClient())
+                        {
+                            var response2 = await client2.GetAsync(urlGameIcon2);
+                            if (response2.IsSuccessStatusCode)
+                            {
+                                using (var stream = await response2.Content.ReadAsStreamAsync())
+                                using (var fileStream = new FileStream(tempFilePath2, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                                {
+                                    await stream.CopyToAsync(fileStream);
+                                }
+                            }
+                        }
+                    }
+
+
 
 
 
@@ -85,11 +111,11 @@ namespace SteamAccManager.Services
                                     }
                                 }
 
-
-
                             }
+
                         }
                     }
+
 
 
                     string json = JsonConvert.SerializeObject(games, Formatting.Indented);
@@ -145,5 +171,38 @@ namespace SteamAccManager.Services
             }
         }
 
+
+
+
+
+
+        public void startGame(List<user> user, string username, string decryptedPassword, string appID)
+        {
+
+
+            // Kill any running Steam processes
+            foreach (var process in Process.GetProcessesByName("steam"))
+            {
+                process.Kill();
+            }
+            // Prepare the process start info
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam", "SteamExe", "null");
+            List<user> userlist = user;
+
+            // Add login arguments
+            startInfo.Arguments = $"-login {username} {decryptedPassword}";
+
+            // Check if a game is selected in listvGames and append its AppID to the arguments
+
+            if(appID != null)
+            {
+                startInfo.Arguments += $" -applaunch {appID}";
+                // Start Steam with the arguments
+                Process.Start(startInfo);
+            }
+
+
+        }
     }
 }

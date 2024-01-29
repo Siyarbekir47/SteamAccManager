@@ -182,7 +182,7 @@ namespace SteamAccManager
 
             lstvGames.ListViewItemSorter = new ListViewItemComparer(0, SortOrder.Ascending);
             lstvGames.Sort();
-            
+
         }
 
 
@@ -202,17 +202,6 @@ namespace SteamAccManager
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -227,6 +216,9 @@ namespace SteamAccManager
             }
             UpdateUserListUI();
             LoadGamesFromDataAccess();
+            PnlNav.Height = panel2.Height;
+            PnlNav.Top = panel2.Top;
+            PnlNav.Left = panel2.Left;
 
         }
 
@@ -279,38 +271,26 @@ namespace SteamAccManager
             PnlNav.Left = buttonStartGame.Left;
             buttonStartGame.BackColor = Color.FromArgb(46, 51, 73);
 
-
             if (comboBox1.SelectedItem == null)
             {
                 MessageBox.Show("Wähle erst einen Benutzer!");
                 return;
             }
 
-            // Kill any running Steam processes
-            foreach (var process in Process.GetProcessesByName("steam"))
+
+            string selectedGameAppID = "0";
+
+            if (lstvGames.SelectedItems.Count > 0)
             {
-                process.Kill();
+                selectedGameAppID = lstvGames.SelectedItems[0].Tag.ToString(); // Assuming the Tag property holds the AppID
             }
 
-            // Prepare the process start info
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam", "SteamExe", "null");
             List<user> userlist = _userDataAccess.LoadUsers();
             string username = userlist[comboBox1.SelectedIndex].username;
             string decryptedPassword = CryptoUtility.DecryptString(userlist[comboBox1.SelectedIndex].password);
+            _steamService.startGame(userlist, username, decryptedPassword, selectedGameAppID);
 
-            // Add login arguments
-            startInfo.Arguments = $"-login {username} {decryptedPassword}";
 
-            // Check if a game is selected in listvGames and append its AppID to the arguments
-            if (lstvGames.SelectedItems.Count > 0)
-            {
-                string selectedGameAppID = lstvGames.SelectedItems[0].Tag.ToString(); // Assuming the Tag property holds the AppID
-                startInfo.Arguments += $" -applaunch {selectedGameAppID}";
-            }
-
-            // Start Steam with the arguments
-            Process.Start(startInfo);
         }
 
         private void feetchGamesButton_Click(object sender, EventArgs e)
@@ -654,5 +634,17 @@ namespace SteamAccManager
             UpdateGamesListUI(filteredGames);
         }
 
+        private void lstvGames_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if(lstvGames.SelectedItems.Count > 0)
+            {
+                string selectedGameAppID = lstvGames.SelectedItems[0].Tag.ToString(); // Assuming the Tag property holds the AppID
+                List<user> userlist = _userDataAccess.LoadUsers();
+                string username = userlist[comboBox1.SelectedIndex].username;
+                string decryptedPassword = CryptoUtility.DecryptString(userlist[comboBox1.SelectedIndex].password);
+                _steamService.startGame(userlist, username, decryptedPassword, selectedGameAppID);
+                Clipboard.SetText(selectedGameAppID);
+            }
+        }
     }
 }

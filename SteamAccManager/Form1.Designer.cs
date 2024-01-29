@@ -336,6 +336,7 @@
             lstvGames.Columns.AddRange(new ColumnHeader[] { tabFirst });
             lstvGames.Font = new Font("MS PGothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lstvGames.ForeColor = Color.FromArgb(158, 161, 176);
+            lstvGames.HeaderStyle = ColumnHeaderStyle.None;
             lstvGames.LargeImageList = imgIcons;
             lstvGames.Location = new Point(290, 65);
             lstvGames.Name = "lstvGames";
@@ -345,6 +346,7 @@
             lstvGames.UseCompatibleStateImageBehavior = false;
             lstvGames.View = View.Tile;
             lstvGames.SelectedIndexChanged += lstvGames_SelectedIndexChanged;
+            lstvGames.MouseDoubleClick += lstvGames_MouseDoubleClick;
             // 
             // tabFirst
             // 
@@ -388,7 +390,7 @@
             MaximumSize = new Size(701, 577);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Steam-Manager@Siyarbekir";
             Load += Form1_Load;
             MouseDown += Form1_MouseDown;
             panel1.ResumeLayout(false);
