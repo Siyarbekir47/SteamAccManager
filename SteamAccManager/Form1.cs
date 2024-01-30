@@ -10,14 +10,10 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
+//dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained false
 
 
 /* TODO:
-dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained false
-
--add search function for games, (all users)
-
--add some visuals on the left, like a profile picture, name, etc.
 */
 
 
@@ -571,10 +567,6 @@ namespace SteamAccManager
             }
         }
 
-        private void lstvGames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -634,7 +626,7 @@ namespace SteamAccManager
 
         private void lstvGames_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if(lstvGames.SelectedItems.Count > 0)
+            if (lstvGames.SelectedItems.Count > 0)
             {
                 string selectedGameAppID = lstvGames.SelectedItems[0].Tag.ToString(); // Assuming the Tag property holds the AppID
                 List<user> userlist = _userDataAccess.LoadUsers();
@@ -644,5 +636,36 @@ namespace SteamAccManager
                 Clipboard.SetText(selectedGameAppID);
             }
         }
+
+        private void lstvGames_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            // Draw the background for the item.
+            e.Graphics.FillRectangle(e.Item.Selected ? new SolidBrush(Color.FromArgb(255, 36, 41, 46)) : new SolidBrush(lstvGames.BackColor), e.Bounds);
+            // Draw the icon if there is an associated image list and the item has an image index set
+            if (lstvGames.SmallImageList != null && e.Item.ImageIndex >= 0)
+            {
+                Image img = lstvGames.SmallImageList.Images[e.Item.ImageIndex];
+                // Calculate the bounds for the image. This will center the image vertically within the item bounds.
+                Rectangle imageBounds = new Rectangle(e.Bounds.Location, lstvGames.SmallImageList.ImageSize);
+                imageBounds.Y += (e.Bounds.Height - lstvGames.SmallImageList.ImageSize.Height) / 2;
+                e.Graphics.DrawImage(img, imageBounds);
+            }
+
+            // Calculate the height of the text.
+            Size textSize = TextRenderer.MeasureText(e.Graphics, e.Item.Text, e.Item.Font);
+            int textStartY = e.Bounds.Top + (e.Bounds.Height - textSize.Height) / 2;
+
+            // Draw the text.
+            Rectangle textRect = new Rectangle(e.Bounds.Left + 40, textStartY, e.Bounds.Width - 40, textSize.Height);
+            TextRenderer.DrawText(e.Graphics, e.Item.Text, e.Item.Font, textRect, e.Item.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Left);
+
+            // If the item is selected, draw a rectangle around it.
+
+        }
+
+
+
+
+
     }
 }

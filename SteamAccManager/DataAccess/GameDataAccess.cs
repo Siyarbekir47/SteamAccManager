@@ -22,6 +22,12 @@ namespace SteamAccManager.DataAccess
             _appFolder = appFolder;
         }
 
+
+
+
+
+
+
         public List<GameInfo> GetUserGames(string steamID64)
         {
             string gamesFilePath = Path.Combine(_appFolder, steamID64 + "Gi.json");
@@ -76,20 +82,7 @@ namespace SteamAccManager.DataAccess
             return null;
         }
 
-        public List<GameInfo> LoadUserGames(string steamID64)
-        {
-            List<GameInfo> loadedGames = new List<GameInfo>();
-            string gamesFilePath = Path.Combine(_appFolder, steamID64 + "Gi.json");
-            if (File.Exists(gamesFilePath))
-            {
 
-                // Logic to load and deserialize the games
-                string json = File.ReadAllText(gamesFilePath);
-                loadedGames = JsonConvert.DeserializeObject<List<GameInfo>>(json);
-                return loadedGames;
-            }
-            return loadedGames;
-        }
 
 
         public string GetIconPath(string appID)

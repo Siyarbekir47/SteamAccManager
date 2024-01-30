@@ -292,7 +292,7 @@
             // 
             // pictureBoxProfile
             // 
-            pictureBoxProfile.Image = Properties.Resources.icon;
+            pictureBoxProfile.Image = (Image)resources.GetObject("pictureBoxProfile.Image");
             pictureBoxProfile.Location = new Point(67, 16);
             pictureBoxProfile.Name = "pictureBoxProfile";
             pictureBoxProfile.Size = new Size(128, 128);
@@ -340,12 +340,13 @@
             lstvGames.LargeImageList = imgIcons;
             lstvGames.Location = new Point(290, 65);
             lstvGames.Name = "lstvGames";
+            lstvGames.OwnerDraw = true;
             lstvGames.Size = new Size(392, 500);
             lstvGames.SmallImageList = imgIcons;
             lstvGames.TabIndex = 3;
             lstvGames.UseCompatibleStateImageBehavior = false;
             lstvGames.View = View.Tile;
-            lstvGames.SelectedIndexChanged += lstvGames_SelectedIndexChanged;
+            lstvGames.DrawItem += lstvGames_DrawItem;
             lstvGames.MouseDoubleClick += lstvGames_MouseDoubleClick;
             // 
             // tabFirst
