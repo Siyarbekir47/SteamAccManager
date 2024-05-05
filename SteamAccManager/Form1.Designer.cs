@@ -347,6 +347,7 @@
             lstvGames.UseCompatibleStateImageBehavior = false;
             lstvGames.View = View.Tile;
             lstvGames.DrawItem += lstvGames_DrawItem;
+            lstvGames.SelectedIndexChanged += lstvGames_SelectedIndexChanged;
             lstvGames.MouseDoubleClick += lstvGames_MouseDoubleClick;
             // 
             // tabFirst

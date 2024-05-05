@@ -663,9 +663,9 @@ namespace SteamAccManager
 
         }
 
+        private void lstvGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-
-
-
+        }
     }
 }

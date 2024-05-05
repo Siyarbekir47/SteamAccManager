@@ -72,7 +72,7 @@ namespace SteamAccManager.Services
 
                     if (!File.Exists(tempFilePath2))
                     {
-                        string urlGameIcon2 = $"https://siyargame.de/downloads/SteamManager/icon.jpg";
+                        string urlGameIcon2 = $"https://siyarbekir.de/downloads/SteamManager/icon.jpg";
                         using (var client2 = new HttpClient())
                         {
                             var response2 = await client2.GetAsync(urlGameIcon2);
@@ -83,6 +83,10 @@ namespace SteamAccManager.Services
                                 {
                                     await stream.CopyToAsync(fileStream);
                                 }
+                            }
+                            else
+                            {
+                                MessageBox.Show("cant dl default icon, need an 0.jpg in Game-Icons folder");
                             }
                         }
                     }
