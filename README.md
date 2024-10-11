@@ -30,7 +30,7 @@ The **Steam Advanced Account Manager** is a comprehensive tool designed to strea
 
 To use this project, follow the instructions below:
 
- **Simply clone repo and build with c# visual studio 2022**
+ **Simply clone repo, add your steamAPI key on Form1.cs to the variable "private string apiKey = "PUT_YOUR_KEY_HERE";" and build with c# visual studio 2022**
 
 ## Usage
 
