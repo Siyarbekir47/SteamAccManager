@@ -21,16 +21,18 @@ The **Steam Advanced Account Manager** is a comprehensive tool designed to strea
 
 ### How It Works
 1. **Add Accounts**: Add your Steam accounts to the manager.
-2. **Select Account**: Choose the account you want to use.
-3. **Browse Game Library**: The manager loads the game library from the selected account.
-4. **Search for a Game**: Use the search bar to find the desired game quickly.
-5. **Start a Game**: Click on the game to automatically log in and start it.
+![1](https://github.com/user-attachments/assets/59c8cdeb-7f8a-453f-9930-222a4c019df4)
+2. **Browse Game Library**: The manager loads the game library from the selected account.
+3. **Search for a Game**: Use the search bar to find the desired game quickly.
+4. **Start a Game**: Click on the game to automatically log in and start it.
+![2](https://github.com/user-attachments/assets/5b0548e9-dc7f-4407-a94b-735cdd06c62c)
 
 ## Installation
 
+
 To use this project, follow the instructions below:
 
- **Simply clone repo, add your steamAPI key on Form1.cs to the variable "private string apiKey = "PUT_YOUR_KEY_HERE";" and build with c# visual studio 2022**
+ **Simply clone repo, add your steamAPI key on Form1.cs to the variable "private string apiKey = "PUT_YOUR_KEY_HERE";" and build with c# visual studio 2022 or use the precompiled version under release**
 
 ## Usage
 
