@@ -82,7 +82,7 @@ namespace SteamAccManager
         {
             _userDataAccess.AddNewUser(user, pass);
             UpdateUserListUI();
-            MessageBox.Show("Benutzer erfolgreich hinzugefügt.");
+            MessageBox.Show("Benutzer erfolgreich hinzugefÃ¼gt.");
         }
 
         private void UpdateUserListUI()
@@ -241,7 +241,7 @@ namespace SteamAccManager
 
             if (comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("Wähle erst einen Bentzer!");
+                MessageBox.Show("WÃ¤hle erst einen Bentzer!");
                 return;
             }
 
@@ -269,7 +269,7 @@ namespace SteamAccManager
 
             if (comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("Wähle erst einen Benutzer!");
+                MessageBox.Show("WÃ¤hle erst einen Benutzer!");
                 return;
             }
 
@@ -299,7 +299,7 @@ namespace SteamAccManager
 
             if (comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("Wähle zuerst einen Benutzer aus.");
+                MessageBox.Show("WÃ¤hle zuerst einen Benutzer aus.");
                 return;
             }
             string SteamID64 = GameDataAccess.GetCurrentSteamID64();
@@ -342,7 +342,7 @@ namespace SteamAccManager
             // Make sure a user is selected
             if (comboBox1.SelectedIndex == -1)
             {
-                MessageBox.Show("Bitte wähle zuerst einen Benutzernamen.");
+                MessageBox.Show("Bitte wÃ¤hle zuerst einen Benutzernamen.");
                 return;
             }
 
@@ -356,7 +356,7 @@ namespace SteamAccManager
                 // Decrypt the password and show it
                 string decryptedPassword = CryptoUtility.DecryptString(userToShow.Value.password);
 
-                MessageBox.Show("Passwort für " + selectedUser + " ist: " + decryptedPassword, "Passwort", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Passwort fÃ¼r " + selectedUser + " ist: " + decryptedPassword, "Passwort", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -377,7 +377,7 @@ namespace SteamAccManager
             // Make sure a user is selected
             if (comboBox1.SelectedIndex == -1)
             {
-                MessageBox.Show("Bitte wähle zuerst einen Benutzernamen.");
+                MessageBox.Show("Bitte wÃ¤hle zuerst einen Benutzernamen.");
                 return;
             }
 
@@ -391,7 +391,7 @@ namespace SteamAccManager
                 // Decrypt the password and copy it
                 string decryptedPassword = CryptoUtility.DecryptString(userToShow.Value.password);
                 Clipboard.SetText(decryptedPassword);
-                MessageBox.Show("In den Clipboard kopiert, STRG+V zum einfügen.");
+                MessageBox.Show("In den Clipboard kopiert, STRG+V zum einfÃ¼gen.");
             }
             else
             {
@@ -427,7 +427,7 @@ namespace SteamAccManager
 
             if (comboBox1.SelectedIndex < 0)
             {
-                MessageBox.Show("Wähle erst einen benutzer aus.");
+                MessageBox.Show("WÃ¤hle erst einen benutzer aus.");
                 return;
 
             }
@@ -435,7 +435,7 @@ namespace SteamAccManager
             string selectedUser = comboBox1.SelectedItem.ToString();
 
             //confirmation dialog to make sure the user wants to delete this
-            var confirmResult = MessageBox.Show("Sicher das du den Benutzer löschen willst?", "Löschen bestätigen!", MessageBoxButtons.YesNo);
+            var confirmResult = MessageBox.Show("Sicher das du den Benutzer lÃ¶schen willst?", "LÃ¶schen bestÃ¤tigen!", MessageBoxButtons.YesNo);
 
             if (confirmResult == DialogResult.Yes)
             {
