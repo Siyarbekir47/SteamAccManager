@@ -49,6 +49,7 @@
             tabFirst = new ColumnHeader();
             imgIcons = new ImageList(components);
             exitButton = new Button();
+            minimizeButton = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxProfile).BeginInit();
@@ -375,12 +376,27 @@
             exitButton.UseVisualStyleBackColor = true;
             exitButton.Click += exitButton_Click;
             // 
+            // minimizeButton
+            // 
+            minimizeButton.FlatAppearance.BorderSize = 0;
+            minimizeButton.FlatStyle = FlatStyle.Flat;
+            minimizeButton.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            minimizeButton.ForeColor = Color.White;
+            minimizeButton.Location = new Point(631, 0);
+            minimizeButton.Name = "minimizeButton";
+            minimizeButton.Size = new Size(32, 25);
+            minimizeButton.TabIndex = 5;
+            minimizeButton.Text = "_";
+            minimizeButton.UseVisualStyleBackColor = true;
+            minimizeButton.Click += minimizeButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(36, 41, 46);
             ClientSize = new Size(701, 577);
+            Controls.Add(minimizeButton);
             Controls.Add(exitButton);
             Controls.Add(lstvGames);
             Controls.Add(txtSearchBox);
@@ -424,5 +440,6 @@
         private Button exitButton;
         private Panel PnlNav;
         private ColumnHeader tabFirst;
+        private Button minimizeButton;
     }
 }

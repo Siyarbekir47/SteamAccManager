@@ -52,7 +52,8 @@ namespace SteamAccManager
         private string myAppFolder;
         private string fullPath;
         private string myResourcesFolder;
-        private string apiKey = "EDF2C147BDAEAD8453FB0FAA92E657E8";
+        //TODO: PUT YOUR API KEY FROM STEAM HERE
+        private string apiKey = "PUT_YOUR_KEY_HERE";
         private Dictionary<string, List<string>> userGames = new Dictionary<string, List<string>>();
         private GameDataAccess _gameDataAccess;
         private UserDataAccess _userDataAccess;
@@ -510,6 +511,7 @@ namespace SteamAccManager
         private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -666,6 +668,11 @@ namespace SteamAccManager
         private void lstvGames_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void minimizeButton_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }
